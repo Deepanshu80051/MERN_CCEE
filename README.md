@@ -862,3 +862,106 @@ AJAX = Asynchronous JavaScript And XML
 $.get(url, callback)
 $.post(url, data, callback)
 ```
+
+## NODE JS
+
+1. Const :- Variable me phir se assign nhi kar sakte but
+   // But objects/arrays can be modified
+const arr = [1, 2];
+arr.push(3);  // OK
+2. REPL - read eval print loop
+3. Node.js is single-threaded and asynchronous
+4. const [a, b] = [10, 20] is Destructuring
+5. To start REPL, just type node
+6. .save filename saves the current session
+7. Tail recursion means recursive call is the last operation
+8. 
+```
+const arr = [1, 2, 3];
+arr.push(4);  // ✅ WORKS! (reference nahi badla)
+arr = [5, 6]; // ❌ ERROR! (reference change nahi kar sakte)
+```
+9. Destructuring
+```
+// Array Destructuring
+const [a, b] = [1, 2];
+
+// Object Destructuring
+const {name, age} = {name: "John", age: 25};
+
+// Renaming
+const {name: userName} = {name: "John"}; // userName = "John"
+```
+10. REPL
+```
+_           // Last result store karta hai
+.help       // All commands dikhata hai
+.exit       // Exit REPL
+.save file  // Session save karta hai
+.load file  // File load karta hai
+.break      // Multi-line expression exit
+Ctrl+C (2x) // Exit REPL
+Ctrl+D      // Exit REPL
+Underscore _ stores last result
+```
+11. REcusrion
+```
+Key Concepts
+
+Stack = Recursive calls store hote hain
+Stack Overflow = Base case na ho to infinite recursion
+Tail Recursion = Last operation recursive call ho
+Memoization = Results cache karke optimization
+```
+
+12. Promise
+* Promise.all() sabhi promises resolve hone tak wait
+* Promise.race() - Jo pehle complete ho uska result
+* Promise.any() - Pehla fulfilled promise ka result
+```
+Key Points ✅
+
+async function always returns Promise
+await pauses execution until Promise resolves
+Cleaner than .then() chains
+Use try-catch for error handling
+await only works inside async function
+process.nextTick() has highest priority (Node.js)
+```
+```
+Key Points ✅
+
+setTimeout = One time execution
+setInterval = Repeated execution
+clearTimeout() / clearInterval() = Cancel
+setTimeout(fn, 0) NOT immediate (Event Loop)
+process.nextTick() > Promises > setTimeout
+```
+```
+console.log("A");
+
+setTimeout(() => console.log("B"), 0);
+
+Promise.resolve().then(() => console.log("C"));
+
+console.log("D");
+
+// Output: A D C B
+```
+Q4: await without async (ERROR!)
+javascriptfunction test() {
+    await fetch('url'); // ❌ SyntaxError!
+}
+Q5: Promise States
+
+Initial → Pending
+Success → Fulfilled (resolved)
+Failure → Rejected
+```
+Promise Methods
+
+Promise.all([]) → All must resolve
+Promise.race([]) → First to settle
+Promise.allSettled([]) → All settled (any state)
+Promise.any([]) → First fulfilled
+```
