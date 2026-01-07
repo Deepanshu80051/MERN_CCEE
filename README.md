@@ -965,3 +965,578 @@ Promise.race([]) → First to settle
 Promise.allSettled([]) → All settled (any state)
 Promise.any([]) → First fulfilled
 ```
+
+
+## Node.js Asynchronous Programming
+https://docs.google.com/document/d/1lIqA5OEUojAbEO4AGeAFPJ46N4CEmAZxeX7xroU1hNc/edit?tab=t.m3awniv4ujc5
+
+```
+Detailed Explanations for Wrong Answers
+Q3: Wrong - c is correct
+javascript[1,2,3].map(x => x * 2) // SYNCHRONOUS callback
+map() immediately execute hota hai, async nahi. fs.readFile async hai.
+
+Q7: Wrong - c is correct
+fs.readFile(path, callback) - ye callback use karta hai.
+fs.readFileSync() synchronous hai, callback nahi leta.
+
+Q11: Wrong - a is correct ⚠️ CRITICAL
+javascriptconst p = new Promise((resolve, reject) => {
+    resolve("Success");  // Promise settled!
+    reject("Error");     // IGNORED! (already settled)
+});
+Output: Success
+Promise ek baar settle ho jaye to state change nahi hota!
+
+Q15: Wrong - b is correct
+Promise.race() returns first SETTLED promise (fulfilled ya rejected).
+Fastest result milta hai, sirf successful nahi.
+
+Q16: Wrong - c is correct
+.finally() always executes, chahe Promise resolve ho ya reject.
+.always() exist nahi karta.
+
+Q18: Wrong - b is correct ⚠️ IMPORTANT
+No! Promise ek baar settle (fulfilled/rejected) ho jaye to state NEVER change nahi hota.
+
+Q19: Wrong - b is correct
+Promise.allSettled() waits for ALL promises to settle (fulfilled OR rejected).
+Result mein status dikhata hai har promise ka.
+
+Q20: Wrong - b is correct ⚠️ CRITICAL EVENT LOOP
+javascriptnew Promise((resolve) => {
+    console.log("A");      // Sync - immediately
+    resolve("B");
+}).then(console.log);      // Microtask queue
+console.log("C");          // Sync - immediately
+Output: A C B
+Promise constructor sync execute hota hai, .then() microtask queue mein jaata hai!
+
+Q21: Wrong - c is correct ⚠️ FUNDAMENTAL
+async function ALWAYS returns Promise.
+javascriptasync function test() { return "Hello"; }
+// Returns: Promise { 'Hello' }
+
+Q24: Wrong - b is correct
+Correct equivalent:
+javascriptasync function getData() {
+    const data = await fetchData();
+    console.log(data);
+}
+
+Q25: Wrong - b is correct
+async/await mein error handling try-catch se hota hai:
+javascripttry {
+    const data = await fetchData();
+} catch(error) {
+    console.log(error);
+}
+
+Q26: Wrong - b is correct ⚠️ IMPORTANT
+javascriptasync function test() { return "Hello"; }
+console.log(test()); // Promise { 'Hello' }
+async function Promise return karta hai, direct value nahi!
+
+Q27: Wrong - a is correct
+await pauses execution until Promise resolves/rejects.
+Ye uska main purpose hai!
+
+Q28: Wrong - c is correct
+Both A and B are correct!
+Dono valid error handling techniques hain:
+
+Option A: try-catch (standard)
+Option B: .catch() with await
+
+
+Q34: Wrong - c is correct ⚠️ EVENT LOOP
+Promise callbacks Microtask Queue mein jaate hain, Callback Queue mein nahi!
+Microtask Queue ki priority zyada hai.
+
+Q37: Wrong - b is correct
+
+setTimeout → Once execute (ek baar)
+setInterval → Repeatedly execute (bar bar)
+
+
+Q38: Wrong - b is correct ⚠️ TRICKY
+setTimeout(callback, 0) immediately execute NAHI hota!
+Ye Call Stack empty hone ka wait karta hai (Event Loop).
+
+Q39: Wrong - b is correct
+clearInterval(id) se setInterval stop karte hain.
+javascriptconst id = setInterval(() => {}, 1000);
+clearInterval(id); // Stop
+
+Q40: Missing Answer - a is correct ⚠️ MOST IMPORTANT
+javascriptconsole.log("1");                          // Sync
+setImmediate(() => console.log("2"));      // Check phase
+setTimeout(() => console.log("3"), 0);      // Timer phase
+process.nextTick(() => console.log("4"));  // Next tick queue
+console.log("5");                          // Sync
+Output: 1 5 4 3 2
+Priority Order:
+
+Sync code: 1, 5
+process.nextTick(): 4 (highest async priority!)
+setTimeout: 3 (Timer phase)
+setImmediate: 2 (Check phase)
+
+
+Critical Concepts to Master
+🔴 Promise State (Q11, Q18)
+
+Once settled → NEVER changes
+resolve() ke baad reject() ignore hota hai
+
+🔴 async/await Fundamentals (Q21, Q26)
+
+async function → Always returns Promise
+Direct value nahi milta, Promise milta hai
+
+🔴 Event Loop Order (Q20, Q32, Q40)
+Sync → process.nextTick() → Promises → setTimeout → setImmediate
+🔴 Promise Callbacks Location (Q34)
+
+Promise → Microtask Queue (high priority)
+setTimeout → Callback Queue (low priority)
+
+🔴 await Purpose (Q27)
+
+Pauses execution until Promise resolves
+Blocking behavior (but non-blocking for Event Loop)
+
+🔴 setTimeout(0) Behavior (Q38)
+
+NOT immediate!
+Waits for Call Stack to clear
+
+
+Topics Needing More Practice
+
+Promise State Management ⚠️
+
+Once settled, never changes
+Multiple resolve/reject calls ignore hote hain
+
+
+Event Loop Execution Order 🔥
+
+Sync → nextTick → Microtasks → Macrotasks
+Promise vs setTimeout timing
+
+
+async/await Return Types 📦
+
+async always wraps return in Promise
+await pauses execution
+
+
+Promise Methods
+
+Promise.race() vs Promise.all() vs Promise.allSettled()
+
+
+Timer Behaviors
+
+setTimeout(0) immediate nahi hai
+clearInterval() for stopping
+```
+
+## Node.js Modules & npm
+```
+Q: Difference between exports and module.exports?
+a) exports is object, module.exports can be anything  ✅
+b) Both are same
+c) exports is faster
+d) module.exports is deprecated
+
+Q: Which is correct?
+a) exports = function() {}     // ❌ Wrong
+b) module.exports = function() {}  // ✅ Correct
+c) require.exports = function() {}
+d) export default function() {}
+Q: Load local module?
+a) require('myModule')      // ❌ npm package
+b) require('./myModule')    // ✅ Correct
+c) import myModule
+d) include('./myModule')
+
+Q: Load built-in module?
+a) require('fs')            // ✅ Correct (no ./)
+b) require('./fs')
+c) require('/fs')
+d) import fs
+
+Yaad Rakho:
+
+Built-in: require('fs') (no path)
+Local: require('./file') (with ./)
+npm: require('package') (no path)
+```
+### NPM Commands
+```
+npm init                    # Create package.json
+npm init -y                 # Skip questions
+
+npm install express         # Local install
+npm install -g nodemon      # Global install (-g flag)
+npm install express --save  # Add to dependencies
+npm install jest --save-dev # Add to devDependencies
+
+npm uninstall express       # Remove package
+npm update                  # Update packages
+npm list                    # List installed
+npm list -g                 # List global
+
+Q: Install package globally?
+a) npm install -g package   ✅
+b) npm install package -g   ✅ (both work)
+c) npm global install package
+d) npm install package --global  ✅ (also works)
+
+Q: Create package.json quickly?
+a) npm init                 // Takes input
+b) npm init -y              ✅ Skip questions
+c) npm create
+d) npm new
+
+Q: Entry point in package.json?
+a) "start"
+b) "main"               ✅ Correct
+c) "entry"
+d) "index"
+
+Q: Development dependencies?
+a) dependencies         // Production
+b) devDependencies      ✅ Correct (dev only)
+c) dev
+d) testDependencies
+
+Q: Run script "start"?
+a) npm start            ✅ Correct
+b) npm run start        ✅ Also works
+c) node start
+d) npm script start
+
+Q: Purpose of package-lock.json?
+a) Lock exact versions      ✅ Correct
+b) Secure packages
+c) List dependencies
+d) Configure npm
+
+Q: Should commit package-lock.json?
+a) Yes                      ✅ Correct
+b) No
+c) Only for production
+d) Optional
+
+Q: When to install globally?
+a) CLI tools (nodemon)      ✅ Correct
+b) Project dependencies
+c) All packages
+d) Never
+
+Q: Where local packages installed?
+a) node_modules/            ✅ Correct
+b) npm/
+c) global/
+d) packages/
+```
+###  FILE SYSTEM (fs) MODULE
+1. Synchronous (Blocking):
+```
+const fs = require('fs');
+
+// Read file
+let data = fs.readFileSync('file.txt', 'utf8');
+console.log(data);
+
+// Write file
+fs.writeFileSync('file.txt', 'Hello World');
+```
+2. Asynchronous (Non-blocking)
+```
+// Read file
+fs.readFile('file.txt', 'utf8', (err, data) => {
+    if (err) throw err;
+    console.log(data);
+});
+
+// Write file
+fs.writeFile('file.txt', 'Hello', (err) => {
+    if (err) throw err;
+    console.log('Written!');
+});Q: Difference sync vs async?
+a) Sync blocks, async doesn't    ✅ Correct
+b) Sync is faster
+c) Async is older
+d) No difference
+
+Q: readFileSync returns?
+a) Data directly                 ✅ Correct
+b) Promise
+c) Callback
+d) undefined
+
+Q: readFile needs?
+a) Callback function             ✅ Correct
+b) Promise
+c) await
+d) return statement
+
+Delete:
+fs.unlinkSync('file.txt')
+fs.unlink('file.txt', callback)
+
+Check Exists:
+fs.existsSync('file.txt')  // true/false
+Q: Delete file method?
+a) fs.delete()
+b) fs.remove()
+c) fs.unlink()              ✅ Correct
+d) fs.deleteFile()
+
+Q: Append to file?
+a) fs.append()              
+b) fs.appendFile()          ✅ Correct
+c) fs.add()
+d) fs.write() // Overwrites
+
+Q: Check file exists?
+a) fs.exists()              // Deprecated
+b) fs.existsSync()          ✅ Correct
+c) fs.check()
+d) fs.isFile()
+
+Q: Create HTTP server?
+a) http.createServer()      ✅ Correct
+b) http.server()
+c) http.create()
+d) new http.Server()
+
+Q: Start server on port?
+a) server.start(3000)
+b) server.listen(3000)      ✅ Correct
+c) server.run(3000)
+d) server.port(3000)
+
+Q: Send response?
+a) res.send()
+b) res.end()                ✅ Correct
+c) res.close()
+d) res.finish()
+
+Q: Get request URL?
+a) req.path
+b) req.url              ✅ Correct
+c) req.route
+d) req.uri
+
+Q: Get HTTP method?
+a) req.method           ✅ Correct
+b) req.type
+c) req.httpMethod
+d) req.verb
+
+Q: Set response header?
+a) res.setHeader()          ✅ Correct
+b) res.writeHead()          ✅ Also correct
+c) res.header()
+d) Both a and b             ✅ Best answer
+
+Q: Content-Type for JSON?
+a) 'text/json'
+b) 'application/json'       ✅ Correct
+c) 'json'
+d) 'text/plain'
+
+Q: Handle GET request?
+a) if (req.method === 'GET')    ✅ Correct
+b) if (req.type === 'GET')
+c) if (req.get === true)
+d) if (req.isGet())
+
+Q: Check URL path?
+a) req.path === '/home'
+b) req.url === '/home'          ✅ Correct
+c) req.route === '/home'
+d) req.uri === '/home'
+```
+⚡ QUICK MCQ REVISION
+```
+Q1: Export single function?
+Answer: module.exports = function() {}
+
+Q2: Load local module?
+Answer: require('./module')
+
+Q3: Load built-in module?
+Answer: require('fs')
+
+Q1: Sync vs Async?
+Answer: Sync blocks, Async doesn't
+
+Q2: Delete file method?
+Answer: fs.unlink()
+
+Q3: Append to file?
+Answer: fs.appendFile()
+
+Q1: Create server?
+Answer: http.createServer()
+
+Q2: Start server?
+Answer: server.listen(port)
+
+Q3: Get request URL?
+Answer: req.url
+
+Q4: Get HTTP method?
+Answer: req.method
+
+Q5: End response?
+Answer: res.end()
+
+In Node.js, exports is an object.
+
+const fs = require('fs');
+let data = fs.readFileSync('file.txt', 'utf8');
+console.log(typeof data);
+
+a) "buffer"
+b) "string"  ✅
+c) "object"
+d) "undefined"
+Q28. How to check if file exists?
+javascripta) fs.exists()
+b) fs.existsSync() ✅
+c) fs.checkFile()
+d) fs.isFile()
+
+Q29. What does 'utf8' specify in readFile?
+javascripta) File format
+b) Encoding ✅
+c) File type
+d) Read mode
+
+writeFile() overwrites (error nahi)
+```
+## EXPRESS
+```
+app.get('/user', (req, res) => {
+    console.log(req.method);        // HTTP method (GET, POST)
+    console.log(req.url);           // URL path
+    console.log(req.params);        // URL parameters
+    console.log(req.query);         // Query strings
+    console.log(req.body);          // Request body (POST data)
+    console.log(req.headers);       // HTTP headers
+});
+```
+1. Query Parameters (? ke baad):
+   // URL: /search?name=Raj&age=25
+2. Route Parameters (: ke saath):
+   // URL: /user/123
+https://docs.google.com/document/d/1lIqA5OEUojAbEO4AGeAFPJ46N4CEmAZxeX7xroU1hNc/edit?tab=t.axph7c22nena
+```
+MCQ Important:
+
+req.params → Route parameters (:id)  -- ${req.params.id}
+req.query → Query strings (?name=value)
+req.body → POST data (middleware needed!)
+res.send() vs res.json() → json auto-converts to JSON
+Status codes: 200 (OK), 404 (Not Found), 500 (Server Error)
+
+// Use router
+app.use('/users', userRoutes);
+`express.Router()` modular routes ke liye
+app.use('/path', router)` router mount karta hai
+
+
+```
+### **Middleware kya hai?**
+Functions jo **request aur response ke beech** run hote hain.
+```
+// Middleware function
+function logger(req, res, next) {
+    console.log(`${req.method} ${req.url}`);
+    next();  // Pass to next middleware/route
+}
+
+// Use middleware
+app.use(logger);
+
+// Now all routes will log
+app.get('/', (req, res) => {
+    res.send('Home');
+});
+```
+Types :- 
+1. Application-level
+2. Route-level
+3. Built-in Middleware :-
+4. Third-party Middleware :-cors
+
+
+Error middleware has 4 parameters: (err, req, res, next)
+
+### EJS
+1. app.set('view engine', 'ejs');
+2. res.render('viewName', data) renders view
+3. <%- include() %> includes partials
+4. <% %> JavaScript code (no output)
+
+```
+// ❌ Wrong - route defined before middleware
+app.get('/', (req, res) => {
+    res.send('Home');
+});
+app.use(logger);  // Won't apply to above route!
+
+// ✅ Correct - middleware first
+app.use(logger);
+app.get('/', (req, res) => {
+    res.send('Home');
+});
+```
+### MCQ
+```
+1. const express = require('express');
+const app = express();
+console.log(typeof app);  // function
+
+b) params from URL path, query from query string
+
+Q23. How to create modular routes?
+a) express.route()
+b) express.Router() ✅
+c) express.module()
+d) app.router()
+
+Q26. What does :id? mean in /user/:id??
+a) Required parameter
+b) Optional parameter ✅
+c) Query parameter
+d) Error
+
+2. app.get('/test', (req, res) => {
+    res.send('Hello');   // Response sent
+    res.send('World');   // Error! Can't send again
+});  // Ek request me sirf ek response bhej sakte ho!
+
+3: express.static() --- (Serves static files)
+```
+```
+// ❌ Wrong - Multiple responses
+res.send('First');
+res.send('Second');  // Error!
+
+// ✅ Correct - One response
+res.send('Only one');
+
+// ✅ Correct - Return stops execution
+if(condition) {
+    return res.send('Stop here');
+}
+res.send('This won't run');
+```
