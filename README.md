@@ -400,7 +400,7 @@ Prototype:
 2. Prototype se properties/methods inherit hoti hain
 3. MCQ Important:
 * __proto__ object ka prototype point karta hai
-* Arrow functions me this binding nahi hoti
+* Arrow functions me this binding nahi hoti -- undefined deta hu
 * All objects inherit from Object.prototype
 
 ## D. Closures (BAHUT IMPORTANT!)
@@ -443,3 +443,236 @@ MCQ Important:
 5. Every object has __proto__
 6. Encapsulation: Private fields #
 7. Inheritance: extends, super()
+### MCQ
+
+1.let arr = [1, 2, 3];
+console.log(arr.__proto__ === Array.prototype);   // true
+
+JavaScript Revision Notes - Topic-wise Priority
+```
+🔴 Priority 1: THIS BINDING & CONTEXT (Sabse Important)
+Q10: Arrow Function aur this
+Tumhara Answer: c (Error)
+Sahi Answer: b (undefined)
+Concept:
+javascriptlet obj = {
+    name: "Raj",
+    greet: () => {
+        console.log(this.name);  // undefined
+    }
+};
+obj.greet();
+Yaad Rakhne Wale Points:
+
+✅ Arrow functions apna this nahi banate
+✅ Arrow function parent scope ka this use karta hai
+✅ Object literal mein arrow function = global this
+✅ Global scope mein this.name = undefined
+❌ Regular function: obj ka this use karta
+
+Rule: Object methods ke liye KABHI arrow function mat use karo!
+
+Q14: Function Context Loss
+Tumhara Answer: a (10)
+Sahi Answer: b (undefined)
+Concept:
+javascriptlet obj = {
+    value: 10,
+    getValue: function() {
+        return this.value;
+    }
+};
+let getValue = obj.getValue;  // Function reference copy
+console.log(getValue());  // undefined - context lost!
+Yaad Rakhne Wale Points:
+
+✅ Function ko variable mein assign karne se this kho jata hai
+✅ obj.getValue aur getValue different hai
+✅ Direct call: this = global object (strict mode mein undefined)
+✅ Fix: getValue.call(obj) ya obj.getValue.bind(obj)
+
+Rule: Function reference copy karne se context lost hota hai!
+
+🔴 Priority 2: AUTOMATIC SEMICOLON INSERTION (ASI)
+Q24: Return Statement Ka Trap
+Tumhara Answer: a ({ value: 10 })
+Sahi Answer: b (undefined)
+Concept:
+javascriptfunction test() {
+    return        // ← JavaScript yahan semicolon add kar deta hai!
+    {
+        value: 10
+    };
+}
+console.log(test());  // undefined
+Yaad Rakhne Wale Points:
+
+✅ return ke baad new line = automatic semicolon
+✅ JavaScript reads: return; (undefined)
+✅ Object baad mein unreachable code ban jata hai
+✅ Fix: return { same line pe likho
+
+Sahi Tarika:
+javascriptfunction test() {
+    return {  // Same line pe start karo!
+        value: 10
+    };
+}
+Rule: Return statement aur opening brace { same line pe!
+
+🟡 Priority 3: CONSTRUCTOR FUNCTIONS
+Q26: Constructor Without new
+Tumhara Answer: d (Person object)
+Sahi Answer: b (undefined)
+Concept:
+javascriptfunction Person(name) {
+    this.name = name;
+}
+let p1 = Person("Raj");  // `new` bhool gaye!
+console.log(p1);  // undefined
+Yaad Rakhne Wale Points:
+
+✅ new ke bina: function normally execute hota hai
+✅ Return statement nahi = undefined return
+✅ this global object ko point karta (window.name = "Raj")
+✅ Object nahi banta
+
+What happens:
+
+Without new: this = global, returns undefined
+With new: this = new object, returns that object
+
+Rule: Constructor function HAMESHA new ke saath call karo!
+
+🟡 Priority 4: PRIVATE FIELDS & PROTOTYPES
+Q31: Prototype Method Sharing
+Tumhara Answer: b (false)
+Sahi Answer: a (true)
+Concept:
+javascriptfunction Person(name) {
+    this.name = name;
+}
+Person.prototype.greet = function() {
+    console.log("Hello " + this.name);
+};
+let p1 = new Person("Raj");
+let p2 = new Person("Priya");
+console.log(p1.greet === p2.greet);  // true!
+Yaad Rakhne Wale Points:
+
+✅ Prototype method SAME reference hota hai
+✅ Dono instances same function share karte hain
+✅ Memory efficient - ek hi function copy
+✅ Method prototype pe store hota, instance pe nahi
+
+Rule: Prototype methods = shared across all instances!
+
+Q32: Private Class Fields
+Tumhara Answer: b (undefined)
+Sahi Answer: c (Error)
+Concept:
+javascriptclass BankAccount {
+    #balance = 1000;  // Private field (#)
+    
+    getBalance() {
+        return this.#balance;  // OK - inside class
+    }
+}
+let acc = new BankAccount();
+console.log(acc.#balance);  // Error! Can't access outside
+Yaad Rakhne Wale Points:
+
+✅ # = Private field (ES2022)
+✅ Class ke bahar access = SyntaxError
+✅ Undefined nahi, direct ERROR throw hota hai
+✅ Only class methods can access private fields
+
+Rule: Private fields (#) class ke bahar accessible nahi!
+
+🟢 Priority 5: ARRAY SORTING
+Q33: Default Sort Behavior
+Tumhara Answer: c ([10, 5, 20, 15])
+Sahi Answer: b ([10, 15, 20, 5])
+Concept:
+javascriptlet arr = [10, 5, 20, 15];
+arr.sort();  // NO comparator!
+console.log(arr);  // [10, 15, 20, 5]
+Yaad Rakhne Wale Points:
+
+✅ Default sort = LEXICOGRAPHIC (string sorting)
+✅ Numbers ko strings mein convert karta hai
+✅ "10" < "15" < "20" < "5" (string comparison)
+✅ Numeric sort ke liye comparator chahiye
+
+Sahi Tarika:
+javascriptarr.sort((a, b) => a - b);  // Numeric sort
+Rule: Numbers sort karne ke liye HAMESHA comparator do!
+
+Q36: String Sorting
+Tumhara Answer: a ("banana")
+Sahi Answer: b ("apple")
+Concept:
+javascriptlet arr = ["banana", "apple", "cherry"];
+arr.sort();
+console.log(arr[0]);  // "apple"
+// Sorted: ["apple", "banana", "cherry"]
+Yaad Rakhne Wale Points:
+
+✅ Strings alphabetically sort hote hain
+✅ Case-sensitive: uppercase < lowercase
+✅ "apple" alphabetically pehle aata hai
+
+
+Q37: Bubble Sort Complexity
+Tumhara Answer: a (O(n))
+Sahi Answer: c (O(n²))
+Yaad Rakhne Wale Points:
+
+✅ Bubble Sort worst case = O(n²)
+✅ Nested loops = n × n
+✅ Best case (sorted): O(n)
+✅ Average case: O(n²)
+
+
+Q39: Sort with Zero Comparator
+Tumhara Answer: a ([3, 1, 4, 1, 5])
+Sahi Answer: c (Order may vary)
+Concept:
+javascriptlet arr = [3, 1, 4, 1, 5];
+arr.sort((a, b) => {
+    return 0;  // All elements equal!
+});
+console.log(arr);  // Implementation dependent
+Yaad Rakhne Wale Points:
+
+✅ Return 0 = elements equal
+✅ JavaScript sort is NOT STABLE in all browsers
+✅ Order implementation-dependent
+✅ Original order maintain nahi hota guaranteed
+
+Rule: Sort stability pe depend mat karo!
+
+📊 Quick Revision Checklist
+THIS Binding (Most Important!)
+
+ Regular function: dynamic this
+ Arrow function: lexical this (parent scope)
+ Method call: obj.method() → this = obj
+ Function copy: context lost
+ call/apply/bind: manual this binding
+
+Common Traps
+
+ Return + newline = ASI (auto semicolon)
+ Constructor without new = undefined
+ Private fields (#) = Error outside class
+ Default sort = lexicographic (string sort)
+ Prototype methods = shared reference
+
+Memory Tips
+🎯 Arrow Function: "Arrow kabhi apna THIS nahi banata"
+🎯 Return Statement: "Return aur { ek hi line pe"
+🎯 Constructor: "NEW bhool gaye toh UNDEFINED milega"
+🎯 Sort: "Numbers ko comparator chahiye"
+🎯 Private Field: "Hash (#) class ke bahar ERROR"
+```
