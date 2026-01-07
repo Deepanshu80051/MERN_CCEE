@@ -676,3 +676,66 @@ Memory Tips
 🎯 Sort: "Numbers ko comparator chahiye"
 🎯 Private Field: "Hash (#) class ke bahar ERROR"
 ```
+
+## DOM
+Exam Confusion Points:
+
+1. ✅ getElementById → NO 's' in element
+2. ✅ getElementsByClassName → HAS 's' in elements
+3. ✅ HTMLCollection = LIVE (auto updates)
+4. ✅ NodeList (querySelectorAll) = STATIC
+5. ✅ querySelector returns FIRST match only
+```
+Q: What's the difference?
+let p = document.createElement('p');
+p.textContent = '<b>Hi</b>';  // → Shows: <b>Hi</b> (text)
+p.innerHTML = '<b>Hi</b>';    // → Shows: Hi (bold)
+```
+6. Event Bubbling vs Capturing:
+```
+// Bubbling (default) - Child → Parent
+element.addEventListener('click', handler, false);
+
+// Capturing - Parent → Child
+element.addEventListener('click', handler, true);
+
+```
+7. Form
+```
+Q: Which is correct for form validation?
+a) form.onsubmit = validate()     // Wrong - executes immediately
+b) form.onsubmit = validate       // Correct
+c) form.onsubmit = validate;      // Correct (same as b)
+d) form.onsubmit = "validate()"   // Wrong
+```
+
+* + = 1 or more, * = 0 or more, ? = optional..
+^ = start, $ = end
+8. 3. Error Types (Exam Me Puchte Hain!)
+```
+// ReferenceError - undefined variable
+console.log(x);  // ReferenceError: x is not defined
+
+// TypeError - wrong type operation
+null.toString();  // TypeError: Cannot read property
+
+// SyntaxError - wrong syntax
+eval('var x = ;');  // SyntaxError
+
+// RangeError - number out of range
+let arr = new Array(-1);  // RangeError
+```
+mcq :- 
+1. Q: Difference between innerHTML and textContent?
+
+a) innerHTML parses HTML, textContent shows plain text  // ✅
+b) Both are same
+c) textContent is faster
+d) innerHTML is deprecated
+2. Q: Prevent form submission?
+
+a) return false in onsubmit
+b) event.preventDefault()    // ✅ Modern way
+c) form.stop()
+d) Both a and b             // ✅ Also correct
+
