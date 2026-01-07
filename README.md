@@ -238,3 +238,90 @@ let arr2 = arr1;
 arr2.push(3);
 console.log(arr1);  // [1, 2, 3] ⚠️ (changed!)
 ```
+* ⚠️
+```
+  "Hello"[10]       // undefined
+"Hello".charAt(10) // "" (empty string)
+"Hello".slice(-2)  // "lo" (last 2)
+[1,2,3].indexOf(4)  // -1 (not undefined!)
+"Hello".indexOf("z") // -1
+[1,2] + [3,4]  // "1,23,4" (strings!)
+
+* console.log([] == ![]);  // true ⚠️
+Step by step:
+![] → false (empty array truthy hai)
+[] == false
+"" == false (array to string conversion)
+0 == 0 → true
+
+console.log([] == []);  // false
+console.log("5" - "2");  // 3
+console.log("5" * "2");  // 10
+console.log(+"5" + +"3");  // 8
+console.log(!!"false");  // true
+console.log(Number(""));  // 0
+console.log("Hello".substring(-2));  // "Hello" substring() negative values ko 0 treat karta hai!
+slice() negative support karta hai, substring() nahi.
+
+let arr = [1, 2, 3];
+delete arr[1];
+console.log(arr.length);  // 3 delete element remove karta hai but length same rehti hai!
+let arr = [1, 2, 3];
+delete arr[1];
+console.log(arr[1]);  // undefined delete us position ko undefined kar deta hai!
+console.log([1, 2, 3].join());  // "1,2,3" join() default separator comma (,) hai!
+let arr = [1, 2, 3];
+for(let i in arr) {
+    console.log(typeof i);  // "string"
+}
+for...in indices ko string me return karta hai! ⚠️
+```
+🎯 Weak Areas Identified:
+1. Advanced Type Coercion (Major Issue!)
+
+* [] == ![] → true
+* "5" - "2" → 3
+* Number("") → 0
+* !!"false" → true
+
+Practice Needed: 30 minutes daily on type conversion
+
+2. Array Methods Edge Cases
+
+* delete operator behavior
+* join() default separator
+* slice() negative indices
+* for...in returns strings
+
+
+3. Hoisting (Still Confusion)
+
+* Function inside function hoisting
+* typeof function
+
+
+4. Loops
+
+* for...in vs for...of
+* Nested loop counting
+
+### 💡 Quick Revision Sheet:
+```
+// Addition (+) prefers strings
+"5" + 2 → "52"
+
+// Other operators prefer numbers
+"5" - 2 → 3
+"5" * 2 → 10
+"5" / 2 → 2.5
+
+// Special conversions
+Number("") → 0
+Number("hello") → NaN
+Boolean("0") → true (non-empty string!)
+delete arr[1]        // Creates undefined, length same
+arr.join()           // Default separator: ","
+arr.slice(1, -1)     // Negative = from end
+for(let i in arr)    // Returns indices as STRINGS
+for(let val of arr)  // Returns VALUES
+```
