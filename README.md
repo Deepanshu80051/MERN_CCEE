@@ -325,3 +325,121 @@ arr.slice(1, -1)     // Negative = from end
 for(let i in arr)    // Returns indices as STRINGS
 for(let val of arr)  // Returns VALUES
 ```
+## Objects & Object Properties
+Object Creation:-
+```
+// 3 ways to create objects:
+
+// 1. Object Literal
+let obj1 = { name: "Raj", age: 25 };
+
+// 2. new Object()
+let obj2 = new Object();
+obj2.name = "Raj";
+
+// 3. Object.create()
+let obj3 = Object.create(null);
+
+let person = { name: "Raj", age: 25 };
+
+
+```
+Accessing Properties: :-
+```
+// Dot notation
+console.log(person.name);  // "Raj"
+
+// Bracket notation (useful for dynamic keys)
+console.log(person["age"]);  // 25
+
+let key = "name";
+console.log(person[key]);  // "Raj"
+```
+Adding/Deleting Properties:
+```
+let obj = { a: 1 };
+
+obj.b = 2;           // Add property
+delete obj.a;        // Delete property
+console.log(obj);    // { b: 2 }
+```
+Important Object Methods:
+
+https://docs.google.com/document/d/1lIqA5OEUojAbEO4AGeAFPJ46N4CEmAZxeX7xroU1hNc/edit?tab=t.ylaxipxyb9bq
+
+MCQ Important:
+
+1. Dot notation me space/special characters allowed nahi
+2. delete operator property remove karta hai
+3. Object.keys() returns array, not object
+
+## Object Methods & Prototypes
+💡 Arrow functions me this nahi hota:
+```
+let obj = {
+    name: "Raj",
+    show: () => {
+        console.log(this.name);  // undefined (no 'this' binding)
+    }
+};
+```
+```
+let person = {
+    name: "Raj",
+    age: 25,
+    greet: function() {
+        console.log("Hello " + this.name);
+    }
+};
+
+person.greet();  // "Hello Raj"
+```
+Prototype:
+
+1. Har object ka ek prototype hota hai
+2. Prototype se properties/methods inherit hoti hain
+3. MCQ Important:
+* __proto__ object ka prototype point karta hai
+* Arrow functions me this binding nahi hoti
+* All objects inherit from Object.prototype
+
+## D. Closures (BAHUT IMPORTANT!)
+Closure: Function jo apne outer function ke variables ko remember kar sakta hai.
+```
+function outer() {
+    let count = 0;
+    
+    function inner() {
+        count++;
+        console.log(count);
+    }
+    
+    return inner;
+}
+
+let counter = outer();
+counter();  // 1
+counter();  // 2
+counter();  // 3
+```
+MCQ Important:
+
+1. Closure = function + lexical environment
+2. Inner function outer variables ko access kar sakta hai
+3. Private variables banane ke liye use hota hai
+
+💡 new keyword kya karta hai:
+
+1. Empty object create karta hai
+2. this ko us object se bind karta hai
+3. Object return karta ha
+
+MCQ Important:
+
+1. sort() default string sort karta hai
+2. Number sorting: (a, b) => a - b
+3. Bubble/Selection/Insertion: O(n²)
+4. Quick/Merge: O(n log n)
+5. Every object has __proto__
+6. Encapsulation: Private fields #
+7. Inheritance: extends, super()
