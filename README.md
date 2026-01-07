@@ -1540,3 +1540,221 @@ if(condition) {
 }
 res.send('This won't run');
 ```
+
+## React
+MCQ Important:
+
+1. npm start runs React app
+2. index.js is entry point
+3. App.js is main component
+4. JSX Rules:
+```
+// 1. Single parent element
+// ❌ Wrong
+return (
+    <h1>Title</h1>
+    <p>Text</p>
+);
+
+// ✅ Correct
+return (
+    <div>
+        <h1>Title</h1>
+        <p>Text</p>
+    </div>
+);
+
+// 2. Close all tags
+<img src="pic.jpg" />  // Self-closing
+<br />
+
+// 3. className (not class)
+<div className="box"></div>
+
+// 4. Expressions in {}
+const name = "Raj";
+<h1>Hello {name}</h1>
+<p>{2 + 3}</p>  // 5
+
+// 5. camelCase for attributes
+<div onClick={handleClick}>  // not onclick
+
+MCQ Traps:
+
+className (not class)
+onClick (not onclick)
+Must have one parent
+{} for JavaScript expressions
+
+
+MCQ Important:
+
+Function components are modern
+Class components need extends React.Component
+Class must have render() method
+Function components don't use this
+```
+5. Props Rules
+```
+// 1. Props are READ-ONLY (can't change)
+// ❌ Wrong
+function Welcome(props) {
+    props.name = "Changed";  // Error!
+}
+
+// 2. Pass any data type
+<User name="Raj" age={25} isAdmin={true} data={[1,2,3]} />
+
+// 3. Default props
+function Welcome({ name = "Guest" }) {
+    return <h1>Hello {name}</h1>;
+}
+<Welcome />  // "Hello Guest"
+<Welcome name="Raj" />  // "Hello Raj"
+
+MCQ Traps:
+
+Props are read-only (immutable)
+Pass as attributes
+Access with props.propertyName
+Numbers/booleans in {}
+
+Data flows parent → child (props)
+```
+### State & Lifecycle
+State = Component's memory (data that changes) - useState
+```
+MCQ Important:
+
+State is mutable (can change)
+Props are immutable (can't change)
+useState for function components
+this.state for class components
+useEffect replaces lifecycle methods
+Context: Global state (avoid prop drilling)
+Pass function reference, not call: onClick={handleClick} ✅, onClick={handleClick()} ❌
+condition && <Component /> (show if true)
+Can return null to render nothing
+```
+
+
+### 🎯 Quick MCQ Revision Points:
+```
+React Basics:
+
+React is a library (not framework)
+Uses Virtual DOM
+JSX: className, onClick, single parent, {} for JS
+Function components are modern
+
+Components:
+
+Function: Simple, no this, hooks
+Class: Complex, this, lifecycle methods
+Must start with capital letter
+
+Props vs State:
+
+Props: Read-only, parent → child
+State: Mutable, component's data
+Props in {} for non-strings: age={25}
+
+Events:
+
+onClick={handleClick} ✅
+onClick={handleClick()} ❌
+onClick={() => handleClick(id)} ✅
+
+Hooks:
+
+useState(initialValue) → [value, setValue]
+useEffect(() => {}, []) → componentDidMount
+useEffect(() => {}, [dep]) → runs when dep changes
+
+Conditional:
+
+{condition ? true : false} (ternary)
+{condition && <Component />} (show if true)
+
+Lists:
+
+map() to render lists
+key prop required (unique)
+```
+
+### MCQ
+```
+1. npx create-react-app my-app
+2. javascriptclass Welcome extends React.Component {
+    // What is needed here?
+}
+a) constructor() method
+b) render() method ✅
+c) display() method
+d) show() method
+
+// ❌ Wrong - lowercase
+function welcome() {
+    return <h1>Hi</h1>;
+}
+<welcome />  // React treats as HTML tag, not component!
+
+// ✅ Correct - Uppercase
+function Welcome() {
+    return <h1>Hi</h1>;
+}
+<Welcome />  // React component
+Rule: Component names must start with capital letter!
+
+// ❌ Wrong
+<User age="25" />     // String "25"
+<User age=(25) />     // Syntax error
+
+// ✅ Correct
+<User age={25} />     // Number 25
+<User active={true} /> // Boolean
+<User data={[1,2,3]} /> // Array
+-------------------------------------
+const [count, setCount] = useState(0);
+
+// ❌ Wrong - Direct assignment
+count = 5;  // Error! Assignment to constant variable
+
+// ✅ Correct - Use setter
+setCount(5);
+
+-------------------------------------
+Q28: useEffect without dependency ❌
+Your Answer: d (Only on mount) | Correct: b (On every render)
+---------------------------------
+
+Q29: What triggers re-render? ❌
+Your Answer: a (State change) | Correct: c (Both state & props)
+------------------------------------------
+
+
+Q30: Modify state directly in class ❌
+Your Answer: d (Only with hooks) | Correct: b (No, use setState)
+// ❌ Wrong - Direct mutation
+        this.state.count = 5;  // Won't trigger re-render!
+        
+        // ✅ Correct
+        this.setState({ count: 5 });  // Triggers re-render
+-------------------------------
+const [count, setCount] = useState(10);
+setCount(count + 1);  // count is still 10
+setCount(count + 1);  // count is still 10
+console.log(count);   // 10 (not updated yet!)
+Why? State updates are asynchronous! count is still 10 when console.log runs.
+----------------------------------------
+Q36: e.preventDefault() ❌
+Your Answer: a (Stops event propagation) | Correct: b (Prevents default behavior)
+// stopPropagation() - Stops event bubbling
+
+preventDefault() → Stops default browser behavior
+stopPropagation() → Stops event bubbling to parent
+```
+```
+Controlled: value + onChange
+e.preventDefault() stops form submission
+Use e.target.value to get input value
