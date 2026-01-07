@@ -739,3 +739,126 @@ b) event.preventDefault()    // ✅ Modern way
 c) form.stop()
 d) Both a and b             // ✅ Also correct
 
+## JSON
+
+1. Language independent
+2. ✅ Native JavaScript support
+3. ❌ Single quotes NOT allowed 'name'..
+❌ Trailing comma NOT allowed..
+❌ Comments NOT allowed..
+❌ Functions NOT allowed..
+❌ undefined NOT allowed (use null)..
+### JSON Parsing (Very Important!)
+1. String to Object - JSON.parse()
+```
+// JSON string
+let jsonString = '{"name":"Raj","age":25}';
+
+// Parse to object
+let obj = JSON.parse(jsonString);
+console.log(obj.name);  // "Raj"
+console.log(obj.age);   // 25
+```
+2. Object to String - JSON.stringify()
+```
+// JavaScript object
+let obj = { name: "Raj", age: 25 };
+
+// Convert to JSON string
+let jsonString = JSON.stringify(obj);
+console.log(jsonString);  // '{"name":"Raj","age":25}'
+```
+```
+1.  Output?
+let str = '{"x":10}';
+let obj = JSON.parse(str);
+console.log(obj.x);
+
+a) "10"
+b) 10        // ✅ Correct (number)
+c) undefined
+d) Error
+
+Q: Output?
+let obj = {x: 10};
+console.log(JSON.stringify(obj));
+
+a) {x: 10}
+b) {"x":10}  // ✅ Correct (string)
+c) [object Object]
+d) undefined
+```
+
+## JQuery
+```
+$(selector).action();
+
+// Examples
+$('#box').hide();           // ID selector
+$('.red').show();           // Class selector
+$('p').fadeIn();            // Tag selector
+```
+```
+Q: jQuery syntax format?
+a) $(selector).action()  // ✅ Correct
+b) jQuery(selector)
+c) document.querySelector()
+d) getElementById()
+
+Q: Select all paragraphs with class "intro"?
+a) $('p.intro')       // ✅ Correct
+b) $('#p.intro')
+c) $('.p intro')
+d) $('p intro')
+
+Q: Select first paragraph?
+a) $('p').first()     // ✅ Correct
+b) $('p:first')       // ✅ Also correct
+c) $('p[0]')
+d) Both a and b       // ✅ Best answer
+
+Q: Get parent of #child?
+a) $('#child').parent()    // ✅ Correct
+b) $('#child').parents()   // All ancestors
+c) $('#child').find()
+d) $('#child').children()
+
+* $('#box').toggle();             // Toggle show/hide
+
+Extends : 
+let obj1 = {a: 1};
+let obj2 = {b: 2};
+$.extend(obj1, obj2);  // obj1 = {a:1, b:2}
+
+Q4: Valid JSON data types?
+Answer: String, Number, Boolean, null, Object, Array
+
+Q1: jQuery syntax?
+Answer: $(selector).action()
+
+Q2: Select element by ID?
+Answer: $('#myId')
+
+Q3: Hide element with animation?
+Answer: $('#box').hide(1000)
+
+Q4: Get text content?
+Answer: $('#box').text()
+
+Q5: Document ready?
+Answer: $(document).ready() or $(function(){})
+```
+
+## AJAX
+AJAX = Asynchronous JavaScript And XML
+
+1. Web page ko reload kiye bina server se data fetch/send kar sakte ho
+2. Asynchronous = Page freeze nahi hota, background me kaam hota hai
+3. Modern web apps me bahut use hota hai (Facebook, Gmail, etc.)
+4.  // Fetch data without reload
+    fetchData();
+```
+    $.ajax({ url, type, success, error })
+$.get(url, callback)
+$.post(url, data, callback)
+```
