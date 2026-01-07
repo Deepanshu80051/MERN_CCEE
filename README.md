@@ -1,7 +1,350 @@
 # MERN_CCEE
 ## PAPER
 ```
+🔥 Complete 40 Questions with Detailed Answers & Explanations (Hindi + English)
 
+Q1. Which of the following tools is used to debug Node.js application?
+a) JSLint
+b) ESLint
+c) EventEmitter
+d) Node Inspector ✅
+Explanation (English): Node Inspector is specifically designed for debugging Node.js applications. JSLint and ESLint are for code quality checking, EventEmitter is for handling events.
+Explanation (Hindi): Node Inspector विशेष रूप से Node.js applications को debug करने के लिए बनाया गया है। JSLint और ESLint code quality check करते हैं, EventEmitter events handle करता है।
+
+Q2. Given the following JavaScript code, what will be the output?
+javascriptvar arr = [1,2,3];
+var arr2 = [6,7,8];
+var result = arr.concat(arr2);
+console.log(result);
+a) 1,2,3
+b) 1,2,3,6,7,8 ✅
+c) Error
+d) 6,7,8
+Explanation (English): concat() method merges two arrays and returns a new array with all elements combined.
+Explanation (Hindi): concat() method दो arrays को merge करके एक नया array return करता है जिसमें सभी elements होते हैं।
+
+Q3. Which jQuery function is used to prevent code from running before the document is finished loading?
+a) $(document).load()
+b) $(document).ready() ✅
+c) $(body).load()
+d) $(body).ready()
+Explanation (English): $(document).ready() ensures that DOM is fully loaded before executing JavaScript code.
+Explanation (Hindi): $(document).ready() यह ensure करता है कि JavaScript code execute होने से पहले DOM पूरी तरह load हो जाए।
+
+Q4. What are the methods used to provide effects in jQuery?
+a) show()
+b) hide()
+c) toggle()
+d) All of the above ✅
+Explanation (English): jQuery provides all three methods - show(), hide(), and toggle() for visual effects.
+Explanation (Hindi): jQuery तीनों methods provide करता है - show(), hide(), और toggle() visual effects के लिए।
+
+Q5. ______ is a command line tool that installs, updates or uninstalls Node.js packages in your application.
+a) package-manager
+b) NPM (Node Package Manager) ✅
+c) REPL
+d) package-installer
+Explanation (English): NPM (Node Package Manager) is the official package manager for Node.js. REPL is an interactive shell.
+Explanation (Hindi): NPM (Node Package Manager) Node.js का official package manager है। REPL एक interactive shell है।
+
+Q6. What is the default ECMAScript target version used by TypeScript compiler?
+a) ES3 ✅
+b) ES6
+c) ES2015
+d) ES2016
+Explanation (English): TypeScript compiler's default target is ES3 for maximum compatibility with older browsers.
+Explanation (Hindi): TypeScript compiler का default target ES3 है ताकि पुराने browsers के साथ maximum compatibility मिल सके।
+
+Q7. Where can you place the styles that are only used by a single component in Angular application?
+a) In the global styles.css
+b) In the app component css ✅
+c) In the module
+d) In the html file
+Explanation (English): Component-specific styles should be placed in the component's CSS file for encapsulation.
+Explanation (Hindi): Component-specific styles को component की CSS file में रखना चाहिए encapsulation के लिए।
+
+Q8. In Angular, which decorator is used to create your own custom-defined pipe?
+a) @Pipe ✅
+b) @Piped
+c) @PipeModule
+d) @PipeClass
+Explanation (English): @Pipe decorator is used to define custom pipes in Angular.
+Explanation (Hindi): @Pipe decorator Angular में custom pipes बनाने के लिए use होता है।
+
+Q9. Where can we put the JavaScript code in an HTML page?
+a) In <head> section only
+b) In <body> section only
+c) In both <head> as well as <body> section ✅
+d) None, JavaScript code can only exist in external file
+Explanation (English): JavaScript can be placed in both <head> and <body> sections, or in external files.
+Explanation (Hindi): JavaScript को <head> और <body> दोनों sections में रख सकते हैं, या external files में भी।
+
+Q10. The process by which the browser decides which object to trigger event handlers is called:
+a) Event Triggering
+b) Event Listening
+c) Event Handling
+d) Event Propagation ✅
+Explanation (English): Event Propagation includes bubbling and capturing phases where browser decides event flow.
+Explanation (Hindi): Event Propagation में bubbling और capturing phases होते हैं जहाँ browser event flow decide करता है।
+
+Q11. Which of the following statements is false about Node.js?
+a) I/O operations are non-blocking
+b) Ideal for synchronous and CPU intensive tasks ✅
+c) Supports caching of modules
+d) Applications can be scaled horizontally & vertically
+Explanation (English): FALSE! Node.js is NOT ideal for CPU-intensive tasks. It's best for I/O operations and asynchronous tasks.
+Explanation (Hindi): FALSE! Node.js CPU-intensive tasks के लिए ideal नहीं है। यह I/O operations और asynchronous tasks के लिए best है।
+
+Q12. Which of the following is the correct code for retrieving the index of the selected option in JavaScript?
+a) document.getElementsByTagName('select')
+b) document.getElementById('myselect')
+c) document.getElementById('myselect').selectedIndex ✅
+d) document.getElementByName('myselect')
+Explanation (English): You need to access the element first, then use .selectedIndex property to get the index.
+Explanation (Hindi): पहले element को access करना होगा, फिर .selectedIndex property से index मिलेगा।
+
+Q13. How many $rootScope can an Angular JS application have?
+a) Zero
+b) One ✅
+c) Two
+d) Infinite
+Explanation (English): Every AngularJS application has exactly ONE $rootScope which is the parent of all scopes.
+Explanation (Hindi): हर AngularJS application में सिर्फ एक ही $rootScope होता है जो सभी scopes का parent होता है।
+
+Q14. Which of the following is a valid URL for user to get response as "Hello John"?
+javascriptapp.get('/name/:name', (req,res)=>{
+  res.send("Hello " + req.params.name);
+});
+a) localhost/john
+b) localhost:4000/John
+c) localhost/name=John
+d) localhost:4000/name/John ✅
+Explanation (English): Route is /name/:name, so URL must be localhost:4000/name/John (port + route + parameter).
+Explanation (Hindi): Route /name/:name है, इसलिए URL होगा localhost:4000/name/John (port + route + parameter)।
+
+Q15. What will be the output of the following JavaScript code?
+javascriptvar num = parseInt("123abc");
+a) 123 ✅
+b) 123abc
+c) Exception
+d) NaN
+Explanation (English): parseInt() parses string until it hits a non-numeric character, so it returns 123.
+Explanation (Hindi): parseInt() string को parse करता है जब तक non-numeric character नहीं आता, इसलिए 123 return होगा।
+
+Q16. Node.js is a ______ language.
+a) Server Side ✅
+b) Client Side
+c) Immediate Side
+d) Network Side
+Explanation (English): Node.js is a server-side JavaScript runtime environment.
+Explanation (Hindi): Node.js एक server-side JavaScript runtime environment है।
+
+Q17. In Angular, which decorator is used to configure your module class?
+a) @NgModule ✅
+b) @NgConfigure
+c) @NgApp
+d) @NgAngular
+Explanation (English): @NgModule decorator is used to define and configure Angular modules.
+Explanation (Hindi): @NgModule decorator Angular modules को define और configure करने के लिए use होता है।
+
+Q18. Which of the following can be used to convert a JSON object into a string?
+a) JSON.Parse()
+b) JSON.Stringify() ✅
+c) JSON.NObj()
+d) JSON.Objectify()
+Explanation (English): JSON.stringify() converts JavaScript object to JSON string. JSON.parse() does the opposite.
+Explanation (Hindi): JSON.stringify() JavaScript object को JSON string में convert करता है। JSON.parse() उल्टा काम करता है।
+
+Q19. As the web app architecture is concerned, which type(s) of testing is/are used as integration test?
+a) Component testing
+b) Content testing
+c) Navigation testing
+d) Both B and C ✅
+Explanation (English): Integration testing in web apps includes Content and Navigation testing to verify system interactions.
+Explanation (Hindi): Web apps में integration testing में Content और Navigation testing शामिल होते हैं system interactions verify करने के लिए।
+
+Q20. In Node.js the ______ class is used to create and consume custom events.
+a) EventEmitter ✅
+b) Events
+c) NodeEvent
+d) CustomEvent
+Explanation (English): EventEmitter class from 'events' module is used for event-driven programming in Node.js.
+Explanation (Hindi): 'events' module का EventEmitter class Node.js में event-driven programming के लिए use होता है।
+
+Q21. What will be the return in the following JavaScript code?
+javascriptfunction construct() {
+  var funcs = [];
+  for (var i = 0; i < 10; i++) {
+    funcs.push(function() {
+      return i;
+    });
+  }
+  return funcs;
+}
+var funcs = construct();
+funcs[5]();
+a) 9
+b) 0
+c) 10 ✅
+d) 12
+Explanation (English): Closure issue! When loop ends, i=10. All functions reference the same i, so they all return 10.
+Explanation (Hindi): Closure problem! जब loop end होता है, i=10 हो जाता है। सभी functions same i को reference करते हैं, इसलिए सब 10 return करेंगे।
+
+Q22. How many callback functions can be attached to handle a request in Express?
+a) Exactly One
+b) Two
+c) Three
+d) Unlimited ✅
+Explanation (English): Express allows unlimited middleware/callback functions for a single route using next().
+Explanation (Hindi): Express एक route के लिए unlimited middleware/callback functions allow करता है next() use करके।
+
+Q23. Predict the output on the console for the following JavaScript code:
+javascriptlet js = "JS Program";
+console.log(typeof js);
+js = 5;
+console.log(typeof js);
+a) string number ✅
+b) string string
+c) null null
+d) string integer
+Explanation (English): First typeof returns "string", after reassignment to 5, typeof returns "number".
+Explanation (Hindi): पहली बार typeof "string" return करेगा, 5 assign करने के बाद typeof "number" return करेगा।
+
+Q24. Which of the following is a utility function in jQuery?
+a) jQuery.add()
+b) jQuery.parseJSON() ✅
+c) jQuery.join()
+d) jQuery.append()
+Explanation (English): jQuery.parseJSON() is a utility function. Others are DOM manipulation methods.
+Explanation (Hindi): jQuery.parseJSON() एक utility function है। बाकी DOM manipulation methods हैं।
+
+Q25. Which HTTP method is used to update existing data?
+a) GET
+b) POST
+c) PUT ✅
+d) FETCH
+Explanation (English): PUT is used to update existing resources. POST creates new, GET retrieves, PATCH does partial update.
+Explanation (Hindi): PUT existing resources को update करने के लिए use होता है। POST नया बनाता है, GET retrieve करता है, PATCH partial update करता है।
+
+Q26. What is the default Content-Type for JSON data?
+a) text/json
+b) application/json ✅
+c) json/text
+d) application/text
+Explanation (English): Standard MIME type for JSON is application/json.
+Explanation (Hindi): JSON के लिए standard MIME type application/json है।
+
+Q27. Which middleware is required to access req.body in Express?
+a) express.static()
+b) express.json() ✅
+c) express.router()
+d) No middleware required
+Explanation (English): express.json() middleware parses incoming JSON payloads and makes it available in req.body.
+Explanation (Hindi): express.json() middleware incoming JSON payloads को parse करके req.body में available कराता है।
+
+Q28. What does res.json() do in Express?
+a) Parses JSON
+b) Sends JSON response ✅
+c) Reads JSON file
+d) Validates JSON
+Explanation (English): res.json() sends a JSON response with proper Content-Type header automatically.
+Explanation (Hindi): res.json() automatically proper Content-Type header के साथ JSON response भेजता है।
+
+Q29. Which React hook is used to manage state in function components?
+a) useEffect
+b) useReducer
+c) useState ✅
+d) useRef
+Explanation (English): useState is the primary hook for managing state in React function components.
+Explanation (Hindi): useState React function components में state manage करने का primary hook है।
+
+Q30. What is JSX?
+a) JavaScript XML ✅
+b) Java Syntax Extension
+c) JSON XML
+d) JavaScript Extra
+Explanation (English): JSX stands for JavaScript XML - it allows writing HTML-like syntax in JavaScript.
+Explanation (Hindi): JSX का मतलब है JavaScript XML - यह JavaScript में HTML जैसा syntax लिखने की permission देता है।
+
+Q31. Which command is used to start a React development server?
+a) npm run
+b) npm start ✅
+c) npm serve
+d) react start
+Explanation (English): npm start runs the development server defined in package.json scripts.
+Explanation (Hindi): npm start package.json scripts में defined development server को run करता है।
+
+Q32. What does key prop do in React?
+a) Styles elements
+b) Identifies components uniquely ✅
+c) Stores state
+d) Binds data
+Explanation (English): key prop helps React identify which items changed, added, or removed in lists.
+Explanation (Hindi): key prop React को यह identify करने में help करता है कि lists में कौन से items change, add या remove हुए हैं।
+
+Q33. Which lifecycle method is called after component is rendered (Class component)?
+a) componentWillMount
+b) componentDidMount ✅
+c) componentWillUpdate
+d) componentDidUpdate
+Explanation (English): componentDidMount() is called immediately after component is mounted/rendered.
+Explanation (Hindi): componentDidMount() component mount/render होने के तुरंत बाद call होता है।
+
+Q34. What does npm init do?
+a) Installs packages
+b) Creates node_modules
+c) Creates package.json ✅
+d) Runs project
+Explanation (English): npm init initializes a new Node.js project and creates package.json file.
+Explanation (Hindi): npm init नया Node.js project initialize करके package.json file बनाता है।
+
+Q35. Which of the following is NOT a valid HTTP status code?
+a) 200
+b) 404
+c) 600 ✅
+d) 500
+Explanation (English): HTTP status codes range from 100-599. 600 is NOT valid.
+Explanation (Hindi): HTTP status codes 100-599 की range में होते हैं। 600 valid नहीं है।
+
+Q36. Which symbol is used to define route parameters in Express?
+a) ?
+b) &
+c) : ✅
+d) #
+Explanation (English): Colon : is used for route parameters: /user/:id
+Explanation (Hindi): Colon : route parameters के लिए use होता है: /user/:id
+
+Q37. Which statement about middleware is TRUE?
+a) Runs after response is sent
+b) Cannot modify request
+c) Has access to req, res, next ✅
+d) Only one middleware allowed
+Explanation (English): Middleware functions have access to request (req), response (res), and next() function.
+Explanation (Hindi): Middleware functions को request (req), response (res), और next() function का access होता है।
+
+Q38. Which hook is equivalent to lifecycle methods in React?
+a) useState
+b) useEffect ✅
+c) useMemo
+d) useCallback
+Explanation (English): useEffect replaces componentDidMount, componentDidUpdate, and componentWillUnmount.
+Explanation (Hindi): useEffect componentDidMount, componentDidUpdate, और componentWillUnmount को replace करता है।
+
+Q39. Which command installs a package globally?
+a) npm install
+b) npm install --save
+c) npm install -g ✅
+d) npm global install
+Explanation (English): -g flag installs packages globally: npm install -g package-name
+Explanation (Hindi): -g flag packages को globally install करता है: npm install -g package-name
+
+Q40. Which database is commonly used with MERN stack?
+a) MySQL
+b) PostgreSQL
+c) MongoDB ✅
+d) Oracle
+Explanation (English): MERN = MongoDB, Express, React, Node.js
+Explanation (Hindi): MERN = MongoDB, Express, React, Node.js
 
 
 
